@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Anastácio,-20.484,-55.807,160.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(37.630005, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(19.739178, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(47.016865, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1009.299, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.016627, dtype=float32)"

@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Paranaíba,-19.677,-51.191,374.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(34.2839, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(18.553997, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(66.722244, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1008.4312, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.01385628, dtype=float32)"

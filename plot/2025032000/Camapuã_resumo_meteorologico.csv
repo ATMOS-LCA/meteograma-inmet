@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Camapuã,-19.531,-54.044,409.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(33.953484, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(20.636396, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(56.642597, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1004.27246, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.00605331, dtype=float32)"

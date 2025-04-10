@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Sete Quedas,-23.97,-55.036,407.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(33.494026, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(16.356323, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(47.523678, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1017.70557, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.03451577, dtype=float32)"

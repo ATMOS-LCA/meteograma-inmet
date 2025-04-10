@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Costa Rica,-18.544,-53.129,641.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(31.499773, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(19.184828, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(68.69679, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1006.75244, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.00338296, dtype=float32)"

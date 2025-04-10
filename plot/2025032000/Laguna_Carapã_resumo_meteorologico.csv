@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Laguna Carapã,-22.546,-55.15,509.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(34.60811, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(17.604774, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(44.52573, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1015.72217, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.02919213, dtype=float32)"

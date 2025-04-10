@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Porto Murtinho,-21.699,-57.883,90.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(38.324974, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(17.22597, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(49.192177, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1011.05585, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.00769584, dtype=float32)"

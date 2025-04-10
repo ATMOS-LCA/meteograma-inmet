@@ -48,6 +48,12 @@ lat  = dset.coords['XLAT']
 lon  = dset.coords['XLONG']
 prec = precc+precsh+precnc
 
+lat1d=lat.values[0,:,0]
+lon1d=lon.values[0,0,:]
+
+dlat=lat1d[1]-lat1d[0]
+dlon=lon1d[1]-lon1d[0]
+
 # Configuração do formato de exibição
 pd.options.display.float_format = '{:.2f}'.format
 pd.set_option('display.max_columns', None)
@@ -122,8 +128,8 @@ for j in range(len(data['Cidade'])):
     print(f"Arquivo resumo salvo em: {csv_path}")
     print(f"Arquivo completo salvo em: {full_csv_path}")
     print("Resumo dos dados:")
-    print(df_summary.to_markdown())
-    print(f"{'='*50}\n")
+    # print(df_summary.to_markdown())
+    # print(f"{'='*50}\n")
 
     # Limpeza de memória
     del precs, t2s, q2s, pss, v10s, u10s, clds, swds, precsr, RH, Po, dirs

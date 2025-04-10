@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Vicentina,-22.409,-54.436,368.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(35.44507, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(19.700153, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(42.781784, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1012.3291, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.02569103, dtype=float32)"

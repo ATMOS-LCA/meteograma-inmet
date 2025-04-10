@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Bataiporã,-22.295,-53.271,334.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(34.890007, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(18.841343, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(51.085297, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1014.04846, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.01408034, dtype=float32)"

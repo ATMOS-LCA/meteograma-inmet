@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Juti,-22.861,-54.603,373.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(35.50476, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(17.263416, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(44.23903, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1016.37476, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.02175742, dtype=float32)"

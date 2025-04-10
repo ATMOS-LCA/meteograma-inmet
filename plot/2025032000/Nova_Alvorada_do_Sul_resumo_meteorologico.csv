@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Nova Alvorada do Sul,-21.466,-54.384,407.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(35.913097, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(18.055643, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(46.010834, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1013.1834, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.02402276, dtype=float32)"

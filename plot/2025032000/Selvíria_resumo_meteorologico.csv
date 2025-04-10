@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Selvíria,-20.367,-51.419,357.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(33.953423, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(19.476263, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(62.11431, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1014.12244, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.01057708, dtype=float32)"

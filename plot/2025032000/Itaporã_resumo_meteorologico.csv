@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Itaporã,-22.079,-54.789,390.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(35.9756, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(19.32501, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(43.38718, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1013.99786, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.02768458, dtype=float32)"

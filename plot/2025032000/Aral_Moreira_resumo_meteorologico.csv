@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Aral Moreira,-22.934,-55.635,609.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(34.018784, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(19.753433, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(43.50485, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1027.0569, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.03304736, dtype=float32)"

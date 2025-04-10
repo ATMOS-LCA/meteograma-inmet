@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Mundo Novo,-23.938,-54.271,324.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(35.630325, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(16.973196, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(47.63015, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1019.35144, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.02832335, dtype=float32)"

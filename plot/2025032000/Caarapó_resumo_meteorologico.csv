@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Caarapó,-22.634,-54.822,471.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(34.60327, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(18.412226, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(44.93261, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1014.76636, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.0279026, dtype=float32)"

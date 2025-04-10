@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Maracaju,-21.614,-55.168,384.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(34.771324, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(17.883759, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(46.78097, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1009.28894, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.02855859, dtype=float32)"

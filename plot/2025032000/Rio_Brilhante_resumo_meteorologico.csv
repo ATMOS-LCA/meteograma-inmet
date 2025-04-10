@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Rio Brilhante,-21.802,-54.546,312.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(36.701622, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(17.929955, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(44.80476, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1011.27277, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.02292653, dtype=float32)"

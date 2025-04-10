@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Ponta Porã,-22.536,-55.726,655.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(32.879425, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(18.742887, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(45.71473, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1017.44135, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.03171768, dtype=float32)"

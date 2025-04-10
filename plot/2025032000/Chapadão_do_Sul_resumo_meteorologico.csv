@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Chapadão do Sul,-18.794,-52.623,790.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(31.124735, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(19.406124, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(69.66241, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1009.5439, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.00944866, dtype=float32)"

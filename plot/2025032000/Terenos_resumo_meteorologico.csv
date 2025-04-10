@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Terenos,-20.442,-54.86,437.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(35.22309, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(19.828438, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(46.610775, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1016.5902, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.02025522, dtype=float32)"

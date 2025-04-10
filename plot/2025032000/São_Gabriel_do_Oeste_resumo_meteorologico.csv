@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,São Gabriel do Oeste,-19.395,-54.566,658.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(32.520836, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(18.869741, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(57.657272, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1011.95795, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.0058386, dtype=float32)"

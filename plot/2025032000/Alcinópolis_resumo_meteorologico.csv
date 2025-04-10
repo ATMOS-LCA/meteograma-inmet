@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Alcinópolis,-18.324,-53.706,443.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(34.15207, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(20.791716, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(63.55791, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1012.2193, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.00608118, dtype=float32)"

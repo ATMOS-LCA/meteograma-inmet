@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Água Clara,-20.448,-52.878,303.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(35.66293, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(19.695179, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(52.740417, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1005.2805, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.00628287, dtype=float32)"

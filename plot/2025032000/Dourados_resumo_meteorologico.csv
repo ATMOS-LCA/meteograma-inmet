@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Dourados,-22.221,-54.806,430.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(35.308685, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(18.516346, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(44.086926, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1013.97516, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.0273299, dtype=float32)"

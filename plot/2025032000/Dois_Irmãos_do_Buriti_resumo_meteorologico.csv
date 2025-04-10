@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Dois Irmãos do Buriti,-20.68,-55.296,320.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(36.058746, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(19.306494, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(48.18401, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1016.4301, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.02367404, dtype=float32)"

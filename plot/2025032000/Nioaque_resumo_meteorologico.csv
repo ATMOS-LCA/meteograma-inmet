@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Nioaque,-21.135,-55.83,200.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(36.945137, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(19.991491, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(46.050064, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1006.76575, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.02789482, dtype=float32)"

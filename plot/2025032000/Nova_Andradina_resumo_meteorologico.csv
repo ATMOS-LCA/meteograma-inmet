@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Nova Andradina,-22.233,-53.343,380.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(34.59182, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(19.514582, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(48.96799, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1014.0098, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.01465126, dtype=float32)"

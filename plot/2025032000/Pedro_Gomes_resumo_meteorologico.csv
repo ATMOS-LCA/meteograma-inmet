@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Pedro Gomes,-18.101,-54.552,282.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(35.6575, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(20.186846, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(63.674362, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1009.29785, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.00162603, dtype=float32)"

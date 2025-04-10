@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Bandeirantes,-19.918,-54.364,629.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(32.861423, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(19.986677, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(53.504597, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1016.4, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.00984441, dtype=float32)"

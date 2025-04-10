@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Paranhos,-23.893,-55.431,429.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(33.90956, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(18.045628, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(45.720425, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1018.99744, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.03905499, dtype=float32)"

@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Guia Lopes da Laguna,-21.458,-56.114,272.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(36.092632, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(19.345297, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(49.308365, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1011.4182, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.02609128, dtype=float32)"

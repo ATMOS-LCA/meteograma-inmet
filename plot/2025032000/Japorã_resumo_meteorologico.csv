@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Japorã,-23.891,-54.404,357.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(35.22097, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(16.620245, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(45.741352, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1017.72156, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.02929177, dtype=float32)"

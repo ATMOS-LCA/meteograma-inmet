@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Miranda,-20.241,-56.378,125.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(37.29602, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(19.842316, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(50.82604, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1008.646, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.00483697, dtype=float32)"

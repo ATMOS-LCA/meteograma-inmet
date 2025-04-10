@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Itaquiraí,-23.474,-54.185,340.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(34.939507, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(17.496317, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(47.274807, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1013.76404, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.02195928, dtype=float32)"

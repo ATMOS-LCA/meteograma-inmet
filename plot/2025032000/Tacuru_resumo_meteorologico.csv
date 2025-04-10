@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Tacuru,-23.633,-55.016,372.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(34.81319, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(16.315523, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(45.397614, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1013.8783, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.02810763, dtype=float32)"

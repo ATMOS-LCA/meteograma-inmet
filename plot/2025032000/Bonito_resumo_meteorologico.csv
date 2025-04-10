@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Bonito,-21.121,-56.482,315.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(35.25795, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(18.3057, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(51.34232, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1008.2551, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.02602235, dtype=float32)"

@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Jaraguari,-20.142,-54.399,589.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(32.630997, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(18.776585, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(54.143707, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1009.1199, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.01244154, dtype=float32)"

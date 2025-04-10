@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Anaurilândia,-22.188,-52.718,312.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(34.116867, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(20.401138, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(52.48333, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1014.52844, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.01043464, dtype=float32)"

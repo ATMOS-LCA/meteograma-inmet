@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Novo Horizonte do Sul,-22.672,-53.861,320.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(35.626793, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(19.038399, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(48.540154, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1012.72546, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.02110788, dtype=float32)"

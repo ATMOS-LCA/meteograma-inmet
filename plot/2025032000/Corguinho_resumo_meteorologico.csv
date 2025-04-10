@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Corguinho,-19.832,-54.829,320.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(35.853813, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(19.391748, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(51.37612, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1009.8875, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.00708018, dtype=float32)"

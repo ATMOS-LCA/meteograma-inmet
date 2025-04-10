@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Campo Grande,-20.443,-54.646,532.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(33.413544, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(20.438957, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(47.36011, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1006.8655, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.01708744, dtype=float32)"

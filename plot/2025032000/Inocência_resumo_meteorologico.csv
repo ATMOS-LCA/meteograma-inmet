@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Inocência,-19.726,-51.93,502.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(34.056427, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(19.543552, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(64.08309, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1010.6534, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.01518674, dtype=float32)"

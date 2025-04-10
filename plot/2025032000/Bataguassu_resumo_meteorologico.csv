@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Bataguassu,-21.714,-52.422,329.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(34.633327, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(19.240246, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(51.303516, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1013.4695, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.01114409, dtype=float32)"

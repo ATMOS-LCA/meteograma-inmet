@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Eldorado,-23.787,-54.284,342.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(35.425667, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(16.536865, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(45.465862, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1016.3185, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.02662041, dtype=float32)"

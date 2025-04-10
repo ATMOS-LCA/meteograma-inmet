@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Taquarussu,-22.488,-53.351,276.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(35.18975, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(19.753325, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(49.873253, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1012.8735, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.01524637, dtype=float32)"

@@ -1,0 +1,7 @@
+Data,Cidade,Latitude,Longitude,Altitude,Temp_Max,Temp_Min,Prec_Acum,UR_Media,Pressao_Media,Nebulosidade_Media
+2025-03-20_00:00:00,Angélica,-22.153,-53.771,358.0,"<xarray.DataArray 'T2' ()> Size: 4B
+array(36.12448, dtype=float32)","<xarray.DataArray 'T2' ()> Size: 4B
+array(18.291164, dtype=float32)",,"<xarray.DataArray ()> Size: 4B
+array(46.354557, dtype=float32)","<xarray.DataArray ()> Size: 4B
+array(1015.3293, dtype=float32)","<xarray.DataArray 'CLDFRA' ()> Size: 4B
+array(0.01863142, dtype=float32)"
