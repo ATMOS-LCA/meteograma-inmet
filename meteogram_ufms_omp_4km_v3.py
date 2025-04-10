@@ -14,29 +14,30 @@ import glob
 import os
 import pandas as pd
 import matplotlib.ticker as mticker
-from metpy.calc import wind_direction
+from   metpy.calc import wind_direction
 
 plt.close()
 date=sys.argv[1]
 hour=sys.argv[2]
-print(date,hour)
 
-odir="C:\\IC\\wrf\\plot\\%s%s\\"%(date,hour)
+odir="./plot/%s%s/"%(date,hour)
 if not os.path.isdir(odir):
     os.mkdir(odir)
 
-fdir="C:\\IC\\wrf\\datain\\%s%s\\"%(date,hour)
+fdir="./datain/%s%s/"%(date,hour)
 flist=glob.glob(os.path.join(fdir,'*d02*'))
 
 data = pd.read_csv('Coodernadas_MS.csv',sep=',')
 
 dset = xr.open_dataset(flist[0])
 
-precc  = dset['RAINC']
-precsh = dset['RAINSH']
-precnc = dset['RAINNC']
-t2 = dset['T2']-273.15
-q2 = dset['Q2']
+KELVIN_BASIS = 273.15
+
+precc  = dset['RAINC'] # precipitação convectiva cumulativa
+precsh = dset['RAINSH'] # PRECIPITAÇÃO TOTAL ACUMULADA EM ESCALA DE GRADE
+precnc = dset['RAINNC'] # precipitação cumulativa não convectiva
+t2 = dset['T2'] - KELVIN_BASIS # TEMPERATURA
+q2 = dset['Q2'] 
 ps = dset['PSFC']/100
 v10 = dset['V10']
 u10 = dset['U10']
