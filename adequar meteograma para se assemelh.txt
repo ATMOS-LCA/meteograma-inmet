@@ -1,0 +1,197 @@
+adequar meteograma para se assemelhar aos dados do INMET
+
+ordem do INMET:
+precipitação, temperatura, temperatura do ponto de orvalho, umidade relativa do ar, pressão atmosférica.
+
+primeiro passo:
+entender o código que lhe foi passado.
+01/04/2025 - O que você sabe até agora?
+In [1]: ls
+ O volume na unidade C não tem nome.
+ O Número de Série do Volume é 30AE-298F
+
+ Pasta de C:\Users\User\OneDrive\wrf
+
+01/04/2025  15:35    <DIR>          .
+01/04/2025  14:12    <DIR>          ..
+01/04/2025  14:52                58 adequar meteograma para se assemelh.txt
+01/04/2025  15:35             2.610 Coodernadas_MS.csv
+01/04/2025  15:24    <DIR>          data
+01/04/2025  15:36             2.904 meteogram_simples_ufms_omp_4km_v3.py
+01/04/2025  15:23    <DIR>          plot
+31/03/2025  14:46            38.899 wrf-20250331T184333Z-001.zip
+               4 arquivo(s)         44.471 bytes
+               4 pasta(s)   377.005.584.384 bytes disponíveis
+
+In [2]: run  meteogram_simples_ufms_omp_4km_v3.py 20250320 00
+  File ~\OneDrive\wrf\meteogram_simples_ufms_omp_4km_v3.py:21
+    odir='C:\Users\User\OneDrive\wrf\plot\%s%s\'%(date,hour)
+         ^
+SyntaxError: unterminated string literal (detected at line 21)
+
+
+In [3]:   run  meteogram_simples_ufms_omp_4km_v3.py 20250320 00
+  File ~\OneDrive\wrf\meteogram_simples_ufms_omp_4km_v3.py:21
+    odir="C:\Users\User\OneDrive\wrf\plot\%s%s\"%(date,hour)
+         ^
+SyntaxError: unterminated string literal (detected at line 21)
+
+
+In [4]:  run  meteogram_simples_ufms_omp_4km_v3.py 20250320 0000
+  File ~\OneDrive\wrf\meteogram_simples_ufms_omp_4km_v3.py:21
+    odir="C:\Users\User\OneDrive\wrf\plot\%s%s\"%(date,hour)
+         ^
+SyntaxError: unterminated string literal (detected at line 21)
+
+
+In [5]: run  meteogram_simples_ufms_omp_4km_v3.py 20250320 00
+  File ~\OneDrive\wrf\meteogram_simples_ufms_omp_4km_v3.py:21
+    odir='C:\Users\User\OneDrive\wrf\plot\{:}{:}\'.format(date,hour)
+         ^
+SyntaxError: unterminated string literal (detected at line 21)
+
+
+In [6]: run  meteogram_simples_ufms_omp_4km_v3.py 20250320 00
+  File ~\OneDrive\wrf\meteogram_simples_ufms_omp_4km_v3.py:21
+    odir="C:\Users\User\OneDrive\wrf\plot\{:}{:}\".format(date,hour)
+         ^
+SyntaxError: unterminated string literal (detected at line 21)
+
+
+In [7]: run  meteogram_simples_ufms_omp_4km_v3.py 20250320 00
+---------------------------------------------------------------------------
+IndexError                                Traceback (most recent call last)
+File ~\OneDrive\wrf\meteogram_simples_ufms_omp_4km_v3.py:31
+     29 data = pd.read_csv('Coodernadas_MS.csv',sep=',')
+     30
+---> 31 dset = xr.open_dataset(flist[0])
+     32
+     33
+
+IndexError: list index out of range
+
+In [8]:  run  meteogram_simples_ufms_omp_4km_v3.py 20250320 00
+---------------------------------------------------------------------------
+IndexError                                Traceback (most recent call last)
+File ~\OneDrive\wrf\meteogram_simples_ufms_omp_4km_v3.py:31
+     29 data = pd.read_csv('Coodernadas_MS.csv',sep=',')
+     30
+---> 31 dset = xr.open_dataset(flist[0])
+     32
+     33
+
+IndexError: list index out of range
+
+In [9]: flist
+Out[9]: []
+
+In [10]:  run  meteogram_simples_ufms_omp_4km_v3.py 20250320 00
+---------------------------------------------------------------------------
+IndexError                                Traceback (most recent call last)
+File ~\OneDrive\wrf\meteogram_simples_ufms_omp_4km_v3.py:31
+     29 data = pd.read_csv('Coodernadas_MS.csv',sep=',')
+     30
+---> 31 dset = xr.open_dataset(flist[0])
+     32
+     33
+
+IndexError: list index out of range
+
+In [11]:  run  meteogram_simples_ufms_omp_4km_v3.py 20250320 00
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+File ~\OneDrive\wrf\meteogram_simples_ufms_omp_4km_v3.py:27
+     25
+     26 fdir="C:\Users\User\OneDrive\wrf\data\{:}{:}\".format(date,hour)
+---> 27 flist=glob.glob(os.path.join(fdir,'*d02*4km'))
+     28
+     29 data = pd.read_csv('Coodernadas_MS.csv',sep=',')
+
+AttributeError: module 'ntpath' has no attribute 'joinfdir'
+
+In [12]:  run  meteogram_simples_ufms_omp_4km_v3.py 20250320 00
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+File ~\OneDrive\wrf\meteogram_simples_ufms_omp_4km_v3.py:27
+     25
+     26 fdir="C:\Users\User\OneDrive\wrf\data\{:}{:}\".format(date,hour)
+---> 27 flist=glob.glob(os.path.join(fdir,'*d02*4km'))
+     28
+     29 data = pd.read_csv('Coodernadas_MS.csv',sep=',')
+
+AttributeError: module 'ntpath' has no attribute 'joinfdir'
+
+In [13]:  run  meteogram_simples_ufms_omp_4km_v3.py 20250320 00
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+File ~\OneDrive\wrf\meteogram_simples_ufms_omp_4km_v3.py:31
+     29 data = pd.read_csv('Coodernadas_MS.csv',sep=',')
+     30
+---> 31 dset = xr.open_dataset(flist[0])
+     32
+     33
+
+File ~\anaconda3\Lib\site-packages\xarray\backends\api.py:547, in open_dataset(filename_or_obj, engine, chunks, cache, decode_cf, mask_and_scale, decode_times, decode_timedelta, use_cftime, concat_characters, decode_coords, drop_variables, inline_array, chunked_array_type, from_array_kwargs, backend_kwargs, **kwargs)
+    544     kwargs.update(backend_kwargs)
+    546 if engine is None:
+--> 547     engine = plugins.guess_engine(filename_or_obj)
+    549 if from_array_kwargs is None:
+    550     from_array_kwargs = {}
+
+File ~\anaconda3\Lib\site-packages\xarray\backends\plugins.py:197, in guess_engine(store_spec)
+    189 else:
+    190     error_msg = (
+    191         "found the following matches with the input file in xarray's IO "
+    192         f"backends: {compatible_engines}. But their dependencies may not be installed, see:\n"
+    193         "https://docs.xarray.dev/en/stable/user-guide/io.html \n"
+    194         "https://docs.xarray.dev/en/stable/getting-started-guide/installing.html"
+    195     )
+--> 197 raise ValueError(error_msg)
+
+ValueError: did not find a match in any of xarray's currently installed IO backends ['scipy']. Consider explicitly selecting one of the installed engines via the ``engine`` parameter, or installing additional IO dependencies, see:
+https://docs.xarray.dev/en/stable/getting-started-guide/installing.html
+https://docs.xarray.dev/en/stable/user-guide/io.html
+
+In [14]: flist
+Out[14]: 'C:\\Users\\User\\OneDrive\\wrf\\data\\2025032000\\*d02*4km'
+
+In [15]:  run  meteogram_simples_ufms_omp_4km_v3.py 20250320 00
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+File ~\OneDrive\wrf\meteogram_simples_ufms_omp_4km_v3.py:31
+     29 data = pd.read_csv('Coodernadas_MS.csv',sep=',')
+     30
+---> 31 dset = xr.open_dataset(flist[0])
+     32
+     33
+
+File ~\anaconda3\Lib\site-packages\xarray\backends\api.py:547, in open_dataset(filename_or_obj, engine, chunks, cache, decode_cf, mask_and_scale, decode_times, decode_timedelta, use_cftime, concat_characters, decode_coords, drop_variables, inline_array, chunked_array_type, from_array_kwargs, backend_kwargs, **kwargs)
+    544     kwargs.update(backend_kwargs)
+    546 if engine is None:
+--> 547     engine = plugins.guess_engine(filename_or_obj)
+    549 if from_array_kwargs is None:
+    550     from_array_kwargs = {}
+
+File ~\anaconda3\Lib\site-packages\xarray\backends\plugins.py:197, in guess_engine(store_spec)
+    189 else:
+    190     error_msg = (
+    191         "found the following matches with the input file in xarray's IO "
+    192         f"backends: {compatible_engines}. But their dependencies may not be installed, see:\n"
+    193         "https://docs.xarray.dev/en/stable/user-guide/io.html \n"
+    194         "https://docs.xarray.dev/en/stable/getting-started-guide/installing.html"
+    195     )
+--> 197 raise ValueError(error_msg)
+
+ValueError: did not find a match in any of xarray's currently installed IO backends ['scipy']. Consider explicitly selecting one of the installed engines via the ``engine`` parameter, or installing additional IO dependencies, see:
+https://docs.xarray.dev/en/stable/getting-started-guide/installing.html
+https://docs.xarray.dev/en/stable/user-guide/io.html
+
+In [16]:  run  meteogram_simples_ufms_omp_4km_v3.py 20250320 00
+C:\Users\User\OneDrive\wrf\meteogram_simples_ufms_omp_4km_v3.py:62: FutureWarning: 'H' is deprecated and will be removed in a future version, please use 'h' instead.
+  utc = pd.date_range(start='{0:s} {1:s}'.format(date,hour),periods=len(time),freq='H',tz='Etc/UCT')
+
+
+Fazer isso para os códigos de nome:
+meteogram_simples_alldays_ufms_omp_4km_v3.py
+meteogram_ufms_omp_4km_v3.py
+meteogram_simples_ufms_omp_4km_v3.py    (este em especifico foi o que vc mexeu)
