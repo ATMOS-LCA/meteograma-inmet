@@ -14,6 +14,7 @@ import glob
 import os
 import pandas as pd
 import matplotlib.ticker as mticker
+import psycopg
 from   metpy.calc import wind_direction
 
 plt.close()
