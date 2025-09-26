@@ -14,8 +14,15 @@ import glob
 import os
 import pandas as pd
 import matplotlib.ticker as mticker
-import psycopg
+import psycopg2
 from   metpy.calc import wind_direction
+
+
+DB_CONN_STR = "dbname=postgres user=postgres password=atmos2025 host=34.39.143.242 port=5432"
+
+def get_db_connection():
+    return psycopg2.connect(DB_CONN_STR)
+
 
 plt.close()
 date = sys.argv[1]
@@ -28,7 +35,7 @@ if not os.path.isdir(odir):
 fdir = "./datain/%s%s/" % (date, hour)
 flist = glob.glob(os.path.join(fdir, '*d02*'))
 
-data = pd.read_csv('Coodernadas_MS.csv', sep=',')
+dados_estacoes = pd.read_csv('Coodernadas_MS.csv', sep=',')
 
 dset = xr.open_dataset(flist[0])
 
@@ -50,15 +57,21 @@ lat = dset.coords['XLAT']
 lon = dset.coords['XLONG']
 prec = precc + precsh + precnc  # Precipitação total
 
+lat1d=lat.values[0,:,0]
+lon1d=lon.values[0,0,:]
+
+dlat=lat1d[1]-lat1d[0]
+dlon=lon1d[1]-lon1d[0]
+
 # Configuração do formato de exibição
 pd.options.display.float_format = '{:.2f}'.format
 pd.set_option('display.max_columns', None)
 
-for j in range(len(data['Cidade'])):
-    city = data['Cidade'][j]
-    llat = float(data['latitude'][j])
-    llon = float(data['longitude'][j])
-    alt = float(data['altitude'][j])
+for j in range(len(dados_estacoes['Cidade'])):
+    city = dados_estacoes['Cidade'][j]
+    llat = float(dados_estacoes['latitude'][j])
+    llon = float(dados_estacoes['longitude'][j])
+    alt = float(dados_estacoes['altitude'][j])
 
     idx = {}
     idx['lat'] = (lat1d >= llat - 2 * dlat) & (lat1d <= llat + 2 * dlat)

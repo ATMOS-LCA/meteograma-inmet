@@ -1,2 +1,4 @@
 /datain
 wrf*
+/plots
+/__pycache__
