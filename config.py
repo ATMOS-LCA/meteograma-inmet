@@ -7,6 +7,7 @@ DEFAULT_CONFIG = {
   "db_user": "postgres",
   "db_password": "atmos2025",
   "db_database": "postgres",
+  "caminho_dados_previsao": "./plots"
 }
 
 def get_config() -> dict:
