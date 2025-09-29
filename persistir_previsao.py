@@ -9,6 +9,7 @@ from pandas import DataFrame
 from database import Database
 from time import sleep
 from config import get_config
+import sys
 QUERY_ESTACOES  = """
 SELECT replace(lower(nome), ' ', '') nome, codigo FROM inmet.estacoes;
 """
@@ -77,11 +78,14 @@ def buscar_estacacao(cidade: str, estacoes: DataFrame, db: Database):
         
     return estacao[0]['codigo']
 
-def extrair_dados_previsao(caminho_arquivo: Path, estacoes: DataFrame, previsaoId: int):
+def extrair_dados_previsao_detalhada(caminho_arquivo: Path, estacoes: DataFrame, previsaoId: int):
     try:
         csv : list[list[str]] = []
         with open(caminho_arquivo) as arquivo:
             csv = list(CsvReader(arquivo, delimiter=SEPARADOR))[1:]
+        numeroColunas = len(csv[0])
+        if not numeroColunas:
+            return []
         with Database() as db:
             codigo_estacao = buscar_estacacao(str(caminho_arquivo).split('/')[-1].split('meteogram')[0].replace('_', ' '), estacoes, db)
             dicts = list(map(lambda x: {
@@ -89,21 +93,21 @@ def extrair_dados_previsao(caminho_arquivo: Path, estacoes: DataFrame, previsaoI
             'data': x[0].split(' ')[0],
             'previsao_id': previsaoId,
             'utc': x[0].split(' ')[1],
-            'precipitacao': normalize_float(x[1]),
-            'temperatura': normalize_float(x[2]),
-            'umidade_relativa': normalize_float(x[3]),
-            'pressao_superficie': normalize_float(x[4]),
-            'u10m': normalize_float(x[5]),
-            'v10m': normalize_float(x[6]),
-            'vento': normalize_float(x[7]),
-            'vento_dir': normalize_float(x[8]),
-            'fracao_vento': normalize_float(x[9]),
-            'radiacao_oc_inc': normalize_float(x[10]),
+            'precipitacao': normalize_float(x[1]) if numeroColunas >= 2 else None,
+            'temperatura': normalize_float(x[2]) if numeroColunas >= 3 else None,
+            'umidade_relativa': normalize_float(x[3]) if numeroColunas >= 4 else None,
+            'pressao_superficie': normalize_float(x[4]) if numeroColunas >= 5 else None,
+            'u10m': normalize_float(x[5]) if numeroColunas >= 6 else None,
+            'v10m': normalize_float(x[6]) if numeroColunas >= 7 else None,
+            'vento': normalize_float(x[7]) if numeroColunas >= 8 else None,
+            'vento_dir': normalize_float(x[8]) if numeroColunas >= 9 else None,
+            'fracao_vento': normalize_float(x[9]) if numeroColunas >= 10 else None,
+            'radiacao_oc_inc': normalize_float(x[10]) if numeroColunas >= 11 else None,
             }, csv))
             return dicts
     except Exception as e:
         print(f'Erro ao ler arquivo: {caminho_arquivo}:\n {e}')
-        raise e
+        return[]
     
 def extrair_dados_previsao_temperatura(caminho_arquivo: Path, previsao: str, estacoes: DataFrame, previsaoId: int):
     try:
@@ -124,9 +128,46 @@ def extrair_dados_previsao_temperatura(caminho_arquivo: Path, previsao: str, est
         }, csv))
     except Exception as e:
         print(f'Erro ao ler arquivo: {caminho_arquivo}:\n {e}')
-        raise e
+        return[]
 
-def main():    
+def extrair_previsao_retroativo(caminho_previsao, previsao, config, estacoes):
+    dataPrevisao = datetime.strptime(previsao[:8], '%Y%m%d').strftime('%d/%m/%Y')
+    previsaoId: int = 0
+    with Database() as db:
+        previsaoId = db.execute_query(INSERT_PREVISAO, { 'data': dataPrevisao, 'tamanho_previsao': 7, 'modelo': 'OMP_4KM'  })[0]['id']
+    arquivos_previsao_temperatura = list(map(lambda x: (Path(os.path.join(caminho_previsao, x)), previsao, estacoes, previsaoId), 
+                                            filter(lambda x: x.endswith(SEARCH_TERM_PREVISAO_TEMPERATURA), os.listdir(caminho_previsao))))
+    arquivos_previsao_detalhada = list(map(lambda x:  (Path(os.path.join(caminho_previsao, x)), estacoes, previsaoId), 
+                                filter(lambda x: 
+                                    x.endswith(f'{previsao}.csv') and not x.startswith('meteogram_omp_4km'), 
+                                    os.listdir(caminho_previsao))))
+    dados_previsao_temperatura = []
+    dados_previsao_detalhada = []
+    for arquivo_previsao_temperatura in arquivos_previsao_temperatura:
+        for item in extrair_dados_previsao_temperatura(*arquivo_previsao_temperatura):
+            dados_previsao_temperatura.append(item)
+            
+    for arquivo_previsao_detalhada in arquivos_previsao_detalhada:
+        for item in extrair_dados_previsao_detalhada(*arquivo_previsao_detalhada):
+            dados_previsao_detalhada.append(item)
+
+    with Database() as db:
+        db.execute_command_batch(INSERT_DADOS_TEMPERATURA_PREVISAO, dados_previsao_temperatura)
+        db.execute_command_batch(INSERT_DADOS_DETALHADOS_PREVISAO, dados_previsao_detalhada)
+
+def consumir_previsoes_passado():
+    config = get_config()
+    estacoes : DataFrame = DataFrame()
+    with Database() as db:
+        estacoes = DataFrame(db.execute_query(QUERY_ESTACOES))
+    caminhos_previsoes = list(map(lambda x: 
+                                (Path(os.path.join(config['caminho_dados_previsao'], x)), x, config, estacoes), 
+                                list(filter(lambda x: x.isnumeric(), os.listdir(config['caminho_dados_previsao'])))))
+    with Pool(4) as pool:
+        pool.starmap(extrair_previsao_retroativo, caminhos_previsoes)
+        
+
+def extrair_previsao():    
     config = get_config()
     dataAtual = datetime.now().strftime('%d/%m/%Y')
     previsoes = list(filter(lambda x: x[:8] == datetime.now().strftime('%Y%m%d'), os.listdir(config['caminho_dados_previsao'])))
@@ -152,11 +193,16 @@ def main():
         with Pool(3) as pool:
             results_temperatura = pool.starmap(extrair_dados_previsao_temperatura, arquivos_previsao_temperatura)
             dados_previsao_temperatura = [item for sublist in results_temperatura for item in sublist]
-            results_detalhado = pool.starmap(extrair_dados_previsao, arquivos_previsao_detalhada)
+            results_detalhado = pool.starmap(extrair_dados_previsao_detalhada, arquivos_previsao_detalhada)
             dados_previsao_detalhada = [item for sublist in results_detalhado for item in sublist]
         
         with Database() as db:
             db.execute_command_batch(INSERT_DADOS_TEMPERATURA_PREVISAO, dados_previsao_temperatura)
             db.execute_command_batch(INSERT_DADOS_DETALHADOS_PREVISAO, dados_previsao_detalhada)
 
-main()
+def main():
+    if '--retroativo' in sys.argv:
+        consumir_previsoes_passado()
+        return
+    extrair_previsao()
+    
