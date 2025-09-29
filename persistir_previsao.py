@@ -205,4 +205,6 @@ def main():
         consumir_previsoes_passado()
         return
     extrair_previsao()
-    
+
+
+main()
