@@ -6,7 +6,7 @@ from multiprocessing import Pool
 from csv import reader as CsvReader
 from datetime import timedelta
 from pandas import DataFrame
-from database import Database
+from infrastucture.database import Database
 from time import sleep
 from config import get_config
 import sys

@@ -20,7 +20,9 @@ SELECT
                     SUBSTRING(utc, 1, 2)::int,
                     SUBSTRING(utc, 3, 4)::int,
                     0) data,
-            temperatura
+            round(temperatura::numeric, 2) as temperatura,
+            round(umidade_relativa::numeric, 2) as umidade,
+            round(precipitacao::numeric, 2) as chuva
         FROM inmet.dados_detalhados_previsao ddp
         INNER JOIN inmet.previsao p on ddp.previsao_id = p.id
         WHERE p.data_inicio = %(start_date)s AND estacao = %(station)s;
@@ -36,7 +38,9 @@ QUERY_INMET_DATA = """
                 SUBSTRING(utc, 3, 4)::int,
                 0
         ) data,
-        temperatura
+        temperatura,
+        umidade,
+        chuva
     FROM inmet.dados_estacoes
     WHERE estacao = %(station)s AND data BETWEEN %(start_date)s AND %(start_date)s::date + INTERVAL '7 DAYS';
 """
