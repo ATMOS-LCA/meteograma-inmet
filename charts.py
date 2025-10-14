@@ -1,9 +1,12 @@
 from flask import Flask, jsonify, render_template_string, request
 import plotly.graph_objs as go
 from plotly.utils import PlotlyJSONEncoder
+import infrastucture.queries as queries
 import json
-from database import Database
-from datetime import datetime
+from infrastucture.database import Database
+
+
+
 app = Flask(__name__)
 
 # HTML template for rendering the chart with a station filter
@@ -46,59 +49,18 @@ HTML_TEMPLATE = """
 
 @app.route("/", methods=["GET"])
 def index():
-    # Initialize the database connection
     with Database() as db:
-        # Fetch the list of stations
-        station_query = """
-        SELECT codigo, nome as estacao FROM inmet.estacoes
-        WHERE EXISTS(SELECT 1 FROM inmet.dados_estacoes WHERE estacao = codigo)
-        ORDER BY nome
-        """
-        stations = db.execute_query(station_query)
-        
+        stations = db.execute_query(queries.QUERY_STATIONS)
         selected_station = request.args.get("station", stations[0]["codigo"])
-        
-        forecast_dates_query = """
-        SELECT data_inicio data FROM inmet.previsao ORDER BY data_inicio DESC;
-        """
-        
-        forecast_dates = db.execute_query(forecast_dates_query)
+        forecast_dates = db.execute_query(queries.QUERY_LAST_PREVISION)
         
         selected_forecast_date = request.args.get("forecast-date", forecast_dates[0]["data"])
         
+        params = { 'start_date': selected_forecast_date, 'station': selected_station }
+        data1 = db.execute_query(queries.QUERY_PREVISION_DATA, params)
         
-        query1 = f"""
-        SELECT
-            make_timestamp(
-                    EXTRACT(YEAR FROM data)::int,
-                    EXTRACT(month FROM data)::int,
-                    EXTRACT(day FROM data)::int,
-                    SUBSTRING(utc, 1, 2)::int,
-                    SUBSTRING(utc, 3, 4)::int,
-                    0) data,
-            temperatura
-        FROM inmet.dados_detalhados_previsao ddp
-        INNER JOIN inmet.previsao p on ddp.previsao_id = p.id
-        WHERE p.data_inicio = '{selected_forecast_date}' AND estacao = '{selected_station}';
-        """
-        data1 = db.execute_query(query1)
-        
-        query2 = f"""
-        SELECT
-            make_timestamp(
-                    EXTRACT(YEAR FROM data)::int,
-                    EXTRACT(month FROM data)::int,
-                    EXTRACT(day FROM data)::int,
-                    SUBSTRING(utc, 1, 2)::int,
-                    SUBSTRING(utc, 3, 4)::int,
-                    0
-            ) data,
-            temperatura
-        FROM inmet.dados_estacoes
-        WHERE estacao = '{selected_station}' AND data BETWEEN '{selected_forecast_date}' AND  '{selected_forecast_date}'::date + INTERVAL '7 DAYS';;
-        """
-        data2 = db.execute_query(query2)
-    
+        data2 = db.execute_query(queries.QUERY_INMET_DATA, params)
+
     x1 = [row['data'] for row in data1]
     y1 = [row['temperatura'] for row in data1]
     x2 = [row['data'] for row in data2]
