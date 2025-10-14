@@ -69,26 +69,31 @@ HTML_TEMPLATE = """
 </html>
 """
 STATIONS = []
+FORECAST_DATES = []
 with Database() as db:
     STATIONS = db.execute_query(queries.QUERY_STATIONS)
+    FORECAST_DATES
+    
+prevision_data = []
+inmet_data = []
 @app.route("/", methods=["GET"])
 def index():
     with Database() as db:
-        
+        changed = False
         selected_station = request.args.get("station", STATIONS[0]["codigo"])
-        forecast_dates = db.execute_query(queries.QUERY_LAST_PREVISION)
+        FORECAST_DATES = db.execute_query(queries.QUERY_LAST_PREVISION)
         
-        selected_forecast_date = request.args.get("forecast-date", forecast_dates[0]["data"])
+        selected_forecast_date = request.args.get("forecast-date", FORECAST_DATES[0]["data"])
         selected_metric = request.args.get("metric", "temperatura")
         
         params = { 'start_date': selected_forecast_date, 'station': selected_station }
-        data1 = db.execute_query(queries.QUERY_PREVISION_DATA, params)
+        prevision_data = db.execute_query(queries.QUERY_PREVISION_DATA, params)
         
-        data2 = db.execute_query(queries.QUERY_INMET_DATA, params)
+        inmet_data = db.execute_query(queries.QUERY_INMET_DATA, params)
 
     # Extract data for Previsão (forecast)
-    x1 = [row['data'] for row in data1]
-    x2 = [row['data'] for row in data2]
+    x1 = [row['data'] for row in prevision_data]
+    x2 = [row['data'] for row in inmet_data]
     
     # Define color pairs and labels for each metric
     metric_config = {
@@ -118,8 +123,8 @@ def index():
     config = metric_config[selected_metric]
     
     # Extract values for selected metric
-    y1 = [row[config['column']] for row in data1]
-    y2 = [row[config['column']] for row in data2]
+    y1 = [row[config['column']] for row in prevision_data]
+    y2 = [row[config['column']] for row in inmet_data]
     
     # Create traces for selected metric only
     # Use bar chart for precipitation/rain, line chart for others
@@ -164,7 +169,7 @@ def index():
         chart_title=chart_title,
         y_axis_title=y_axis_title,
         stations=STATIONS,
-        forecast_dates=forecast_dates,
+        forecast_dates=FORECAST_DATES,
         selected_forecast_date=selected_forecast_date,
         selected_station=selected_station,
         selected_metric=selected_metric

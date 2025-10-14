@@ -4,3 +4,5 @@ pandas==2.2.2
 psycopg2_binary==2.9.7
 flask
 plotly
+paramiko<3.0.0
+sshtunnel

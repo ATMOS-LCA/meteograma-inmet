@@ -7,7 +7,11 @@ DEFAULT_CONFIG = {
   "db_user": "postgres",
   "db_password": "atmos2025",
   "db_database": "postgres",
-  "caminho_dados_previsao": "./plots"
+  "caminho_dados_previsao": "./plots",
+  "use_ssh": False,
+  "ssh_user": "",
+  "ssh_ip": "",
+  "ssh_password": ""
 }
 
 def get_config() -> dict:
