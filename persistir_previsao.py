@@ -175,6 +175,7 @@ def consumir_previsoes_passado(parallel: bool):
                 config,
                 estacoes
             )        
+        return
     caminhos_previsoes = list(map(lambda x: 
                                 (Path(os.path.join(config['caminho_dados_previsao'], x)), x, config, estacoes), 
                                 list(filter(lambda x: x.isnumeric(), os.listdir(config['caminho_dados_previsao'])))))
