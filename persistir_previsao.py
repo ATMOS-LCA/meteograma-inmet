@@ -162,11 +162,19 @@ def extrair_previsao_retroativo(caminho_previsao, previsao, config, estacoes):
         db.execute_command_batch(INSERT_DADOS_TEMPERATURA_PREVISAO, dados_previsao_temperatura)
         db.execute_command_batch(INSERT_DADOS_DETALHADOS_PREVISAO, dados_previsao_detalhada)
 
-def consumir_previsoes_passado():
+def consumir_previsoes_passado(parallel: bool):
     config = get_config()
     estacoes : DataFrame = DataFrame()
     with Database() as db:
         estacoes = DataFrame(db.execute_query(QUERY_ESTACOES))
+    if not parallel:
+        for previsao in list(filter(lambda x: x.isnumeric(), os.listdir(config['caminho_dados_previsao']))):
+            extrair_previsao_retroativo(
+                Path(os.path.join(config['caminho_dados_previsao'], previsao)),
+                previsao,
+                config,
+                estacoes
+            )        
     caminhos_previsoes = list(map(lambda x: 
                                 (Path(os.path.join(config['caminho_dados_previsao'], x)), x, config, estacoes), 
                                 list(filter(lambda x: x.isnumeric(), os.listdir(config['caminho_dados_previsao'])))))
@@ -209,7 +217,7 @@ def extrair_previsao():
 
 def main():
     if '--retroativo' in sys.argv:
-        consumir_previsoes_passado()
+        consumir_previsoes_passado('--parallel' in sys.argv)
         return
     extrair_previsao()
 
