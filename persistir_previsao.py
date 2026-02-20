@@ -1,4 +1,5 @@
 import os
+import unicodedata
 from psycopg2.errors import UniqueViolation
 from pathlib import Path
 from datetime import datetime
@@ -11,7 +12,7 @@ from time import sleep
 from config import get_config
 import sys
 QUERY_ESTACOES  = """
-SELECT replace(lower(nome), ' ', '') nome, codigo FROM inmet.estacoes;
+SELECT replace(lower(unaccent(nome)), ' ', '') nome, codigo FROM inmet.estacoes;
 """
 
 INSERT_ESTACAO = """
@@ -62,12 +63,18 @@ RETURNING id;
 SEPARADOR = ','
 SEARCH_TERM_PREVISAO_TEMPERATURA = ('d7.csv', 'd6.csv', 'd5.csv', 'd4.csv', 'd3.csv', 'd2.csv', 'd1.csv')
 
+def remove_diacritics(text: str) -> str:
+    if not text:
+        return text
+    nfd = unicodedata.normalize('NFD', text)
+    return ''.join(char for char in nfd if unicodedata.category(char) != 'Mn')
+
 def normalize_float(value: str):
     if not value: return None
     return float(value)
 
 def buscar_estacacao(cidade: str, estacoes: DataFrame, db: Database):
-    estacao = estacoes[( estacoes['nome'] == cidade.replace(' ', '').lower() )].to_dict('records')
+    estacao = estacoes[( estacoes['nome'] == remove_diacritics(cidade.replace(' ', '').lower()) )].to_dict('records')
     if (len(estacao) == 0):
         try: 
             estacao = db.execute_query(INSERT_ESTACAO, { 'cidade': cidade })
