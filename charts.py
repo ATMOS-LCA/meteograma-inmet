@@ -185,7 +185,7 @@ def index():
     
     chart_data = [trace1, trace2]
 
-    # Add traces for selected foreign models. These will be rendered as lines (even for precipitation) as requested.
+    # Add traces for selected foreign models. Render as bars when metric is 'chuva', otherwise as dotted lines.
     model_colors = [
         'magenta', 'cyan', 'orange', 'purple', 'brown', 'gray', 'black', 'navy'
     ]
@@ -196,13 +196,22 @@ def index():
         x_m = [r['data'] for r in rows]
         y_m = [r[config['column']] for r in rows]
         color = model_colors[i % len(model_colors)]
-        trace_m = go.Scatter(
-            x=x_m,
-            y=y_m,
-            mode='lines',
-            name=f'{model_name} - {config["label"]}',
-            line=dict(color=color, width=2, dash='dot')
-        )
+        if selected_metric == 'chuva':
+            trace_m = go.Bar(
+                x=x_m,
+                y=y_m,
+                name=f'{model_name} - {config["label"]}',
+                marker=dict(color=color),
+                opacity=0.6
+            )
+        else:
+            trace_m = go.Scatter(
+                x=x_m,
+                y=y_m,
+                mode='lines',
+                name=f'{model_name} - {config["label"]}',
+                line=dict(color=color, width=2, dash='dot')
+            )
         chart_data.append(trace_m)
         i += 1
 
