@@ -41,6 +41,20 @@ HTML_TEMPLATE = """
             <option value="umidade" {% if selected_metric == 'umidade' %}selected{% endif %}>Umidade (%)</option>
             <option value="chuva" {% if selected_metric == 'chuva' %}selected{% endif %}>Precipitação/Chuva (mm)</option>
         </select>
+        <!-- Dynamic foreign model checkboxes -->
+        <fieldset>
+            <legend>Comparar com modelos estrangeiros</legend>
+            {% if foreign_models and foreign_models|length > 0 %}
+                {% for model in foreign_models %}
+                    <label>
+                        <input type="checkbox" name="models" value="{{ model.modelo }}" {% if model.modelo in selected_models %}checked{% endif %}>
+                        {{ model.modelo }}
+                    </label>
+                {% endfor %}
+            {% else %}
+                <em>Nenhum modelo estrangeiro disponível para a data selecionada.</em>
+            {% endif %}
+        </fieldset>
         <button type="submit">Generate Graph</button>
     </form>
     <div id="chart"></div>
@@ -72,8 +86,7 @@ STATIONS = []
 FORECAST_DATES = []
 with Database() as db:
     STATIONS = db.execute_query(queries.QUERY_STATIONS)
-    FORECAST_DATES
-    
+
 prevision_data = []
 inmet_data = []
 @app.route("/", methods=["GET"])
@@ -82,14 +95,25 @@ def index():
         changed = False
         selected_station = request.args.get("station", STATIONS[0]["codigo"])
         FORECAST_DATES = db.execute_query(queries.QUERY_LAST_PREVISION)
-        
-        selected_forecast_date = request.args.get("forecast-date", FORECAST_DATES[0]["data"])
+        selected_forecast_date = request.args.get("forecast-date", FORECAST_DATES[0]["data"]) 
         selected_metric = request.args.get("metric", "temperatura")
-        
+
+        # get available foreign models for this forecast date
+        foreign_models = db.execute_query(queries.QUERY_FOREIGN_MODELS, {'start_date': selected_forecast_date})
+
+        # Read which models were selected via checkboxes (can be multiple)
+        selected_models = request.args.getlist('models') if request.args.getlist('models') else []
+
         params = { 'start_date': selected_forecast_date, 'station': selected_station }
         prevision_data = db.execute_query(queries.QUERY_PREVISION_DATA, params)
-        
         inmet_data = db.execute_query(queries.QUERY_INMET_DATA, params)
+
+        # Fetch data for each selected foreign model
+        foreign_data_by_model = {}
+        for model in selected_models:
+            params_model = { 'start_date': selected_forecast_date, 'station': selected_station, 'modelo': model }
+            rows = db.execute_query(queries.QUERY_FOREIGN_PREVISION_DATA, params_model)
+            foreign_data_by_model[model] = rows
 
     # Extract data for Previsão (forecast)
     x1 = [row['data'] for row in prevision_data]
@@ -160,6 +184,28 @@ def index():
         )
     
     chart_data = [trace1, trace2]
+
+    # Add traces for selected foreign models. These will be rendered as lines (even for precipitation) as requested.
+    model_colors = [
+        'magenta', 'cyan', 'orange', 'purple', 'brown', 'gray', 'black', 'navy'
+    ]
+    i = 0
+    for model_name, rows in foreign_data_by_model.items():
+        if not rows:
+            continue
+        x_m = [r['data'] for r in rows]
+        y_m = [r[config['column']] for r in rows]
+        color = model_colors[i % len(model_colors)]
+        trace_m = go.Scatter(
+            x=x_m,
+            y=y_m,
+            mode='lines',
+            name=f'{model_name} - {config["label"]}',
+            line=dict(color=color, width=2, dash='dot')
+        )
+        chart_data.append(trace_m)
+        i += 1
+
     chart_title = f'Comparação: Previsão vs INMET - {config["label"]}'
     y_axis_title = f'{config["label"]} ({config["unit"]})'
     
@@ -172,7 +218,9 @@ def index():
         forecast_dates=FORECAST_DATES,
         selected_forecast_date=selected_forecast_date,
         selected_station=selected_station,
-        selected_metric=selected_metric
+        selected_metric=selected_metric,
+        foreign_models=foreign_models,
+        selected_models=selected_models
     )
 
 if __name__ == "__main__":
