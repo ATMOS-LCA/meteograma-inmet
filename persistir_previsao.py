@@ -17,8 +17,26 @@ SELECT replace(lower(unaccent(nome)), ' ', '') nome, codigo FROM inmet.estacoes;
 
 INSERT_ESTACAO = """
 INSERT INTO inmet.estacoes (codigo, nome) SELECT CONCAT('U',MAX(SUBSTR(codigo, 2, 4)::int4) + 1), %(cidade)s FROM inmet.estacoes
-RETURNING codigo;
+RETURNING codigo, replace(lower(unaccent(nome)), ' ', '') nome;
 """
+
+QUERY_ESTACAO = """
+WITH CODIGO_ESTACAO AS (
+    SELECT codigo FROM inmet.estacoes WHERE replace(lower(unaccent(nome)), ' ', '')  = %(termo_busca)s
+),
+INSERT_NOVA_ESTACAO AS (
+    INSERT INTO inmet.estacoes (codigo, nome) SELECT COALESCE(MAX(ce.codigo), CONCAT('U',MAX(SUBSTR(e.codigo, 2, 4)::int4) + 1)), %(cidade)s FROM inmet.estacoes e
+        LEFT JOIN CODIGO_ESTACAO ce ON TRUE
+        ON CONFLICT DO NOTHING
+        RETURNING codigo
+    )
+SELECT COALESCE(
+       (SELECT codigo FROM INSERT_NOVA_ESTACAO LIMIT 1),
+        (SELECT codigo FROM CODIGO_ESTACAO LIMIT 1)
+       ) codigo;
+
+"""
+
 
 INSERT_DADOS_DETALHADOS_PREVISAO = """
 INSERT INTO inmet.dados_detalhados_previsao (
@@ -73,19 +91,12 @@ def normalize_float(value: str):
     if not value: return None
     return float(value)
 
-def buscar_estacacao(cidade: str, estacoes: DataFrame, db: Database):
-    estacao = estacoes[( estacoes['nome'] == remove_diacritics(cidade.replace(' ', '').lower()) )].to_dict('records')
-    if (len(estacao) == 0):
-        try: 
-            estacao = db.execute_query(INSERT_ESTACAO, { 'cidade': cidade })
-        except UniqueViolation as e:
-            print(f'CONFLICT: {e} \n waiting...')
-            sleep(0.1)
-            estacao = db.execute_query(INSERT_ESTACAO, { 'cidade': cidade })
-        
+def buscar_estacacao(cidade: str, db: Database):
+    nome_estacao_normalizado = remove_diacritics(cidade.replace(' ', '').lower())
+    estacao = db.execute_query(QUERY_ESTACAO, { 'termo_busca': nome_estacao_normalizado, 'cidade': cidade })
     return estacao[0]['codigo']
 
-def extrair_dados_previsao_detalhada(caminho_arquivo: Path, estacoes: DataFrame, previsaoId: int):
+def extrair_dados_previsao_detalhada(caminho_arquivo: Path, previsaoId: int):
     try:
         csv : list[list[str]] = []
         with open(caminho_arquivo) as arquivo:
@@ -94,7 +105,7 @@ def extrair_dados_previsao_detalhada(caminho_arquivo: Path, estacoes: DataFrame,
         if not numeroColunas:
             return []
         with Database() as db:
-            codigo_estacao = buscar_estacacao(str(caminho_arquivo).split('/')[-1].split('meteogram')[0].replace('_', ' '), estacoes, db)
+            codigo_estacao = buscar_estacacao(str(caminho_arquivo).split('/')[-1].split('meteogram')[0].replace('_', ' ').replace(' - ', '/').strip(), db)
             dicts = list(map(lambda x: {
             'estacao': codigo_estacao,
             'data': x[0].split(' ')[0],
@@ -116,7 +127,7 @@ def extrair_dados_previsao_detalhada(caminho_arquivo: Path, estacoes: DataFrame,
         print(f'Erro ao ler arquivo: {caminho_arquivo}:\n {e}')
         return[]
     
-def extrair_dados_previsao_temperatura(caminho_arquivo: Path, previsao: str, estacoes: DataFrame, previsaoId: int):
+def extrair_dados_previsao_temperatura(caminho_arquivo: Path, previsao: str, previsaoId: int):
     try:
         dia_previsao = int(str(caminho_arquivo)[-5]) - 1
         csv : list[list[str]] = []
@@ -126,7 +137,7 @@ def extrair_dados_previsao_temperatura(caminho_arquivo: Path, previsao: str, est
         with Database() as db:
             return list(map(lambda x: {
             'data': data_previsao,
-            'estacao': buscar_estacacao(x[1], estacoes, db),
+            'estacao': buscar_estacacao(x[1].replace(' - ', '/').strip(), db),
             'previsao_id': previsaoId,
             'temperatura_max': normalize_float(x[-4]),
             'temperatura_min': normalize_float(x[-3]),
@@ -137,14 +148,14 @@ def extrair_dados_previsao_temperatura(caminho_arquivo: Path, previsao: str, est
         print(f'Erro ao ler arquivo: {caminho_arquivo}:\n {e}')
         return[]
 
-def extrair_previsao_retroativo(caminho_previsao, previsao, config, estacoes):
+def extrair_previsao_retroativo(caminho_previsao, previsao, config):
     dataPrevisao = datetime.strptime(previsao[:8], '%Y%m%d').strftime('%d/%m/%Y')
     previsaoId: int = 0
     with Database() as db:
         previsaoId = db.execute_query(INSERT_PREVISAO, { 'data': dataPrevisao, 'tamanho_previsao': 7, 'modelo': 'OMP_4KM'  })[0]['id']
-    arquivos_previsao_temperatura = list(map(lambda x: (Path(os.path.join(caminho_previsao, x)), previsao, estacoes, previsaoId), 
+    arquivos_previsao_temperatura = list(map(lambda x: (Path(os.path.join(caminho_previsao, x)), previsao, previsaoId), 
                                             filter(lambda x: x.endswith(SEARCH_TERM_PREVISAO_TEMPERATURA), os.listdir(caminho_previsao))))
-    arquivos_previsao_detalhada = list(map(lambda x:  (Path(os.path.join(caminho_previsao, x)), estacoes, previsaoId), 
+    arquivos_previsao_detalhada = list(map(lambda x:  (Path(os.path.join(caminho_previsao, x)), previsaoId), 
                                 filter(lambda x: 
                                     x.endswith(f'{previsao}.csv') and not x.startswith('meteogram_omp_4km'), 
                                     os.listdir(caminho_previsao))))
@@ -164,63 +175,68 @@ def extrair_previsao_retroativo(caminho_previsao, previsao, config, estacoes):
 
 def consumir_previsoes_passado(parallel: bool):
     config = get_config()
-    estacoes : DataFrame = DataFrame()
-    with Database() as db:
-        estacoes = DataFrame(db.execute_query(QUERY_ESTACOES))
     if not parallel:
         for previsao in list(filter(lambda x: x.isnumeric(), os.listdir(config['caminho_dados_previsao']))):
             extrair_previsao_retroativo(
                 Path(os.path.join(config['caminho_dados_previsao'], previsao)),
                 previsao,
-                config,
-                estacoes
+                config
             )        
         return
     caminhos_previsoes = list(map(lambda x: 
-                                (Path(os.path.join(config['caminho_dados_previsao'], x)), x, config, estacoes), 
+                                (Path(os.path.join(config['caminho_dados_previsao'], x)), x, config), 
                                 list(filter(lambda x: x.isnumeric(), os.listdir(config['caminho_dados_previsao'])))))
     with Pool(4) as pool:
         pool.starmap(extrair_previsao_retroativo, caminhos_previsoes)
         
 
-def extrair_previsao():    
+def extrair_previsao(parallel: bool = True):    
     config = get_config()
     dataAtual = datetime.now().strftime('%d/%m/%Y')
     previsoes = list(filter(lambda x: x[:8] == datetime.now().strftime('%Y%m%d'), os.listdir(config['caminho_dados_previsao'])))
     if not previsoes:
         print(f'Previsão não encontrada para {dataAtual}')
         return
-    estacoes : DataFrame = DataFrame()
     previsaoId: int = 0
     with Database() as db:
-        estacoes = DataFrame(db.execute_query(QUERY_ESTACOES))
         previsaoId = db.execute_query(INSERT_PREVISAO, { 'data': dataAtual, 'tamanho_previsao': 7, 'modelo': 'OMP_4KM'  })[0]['id']
     for previsao in previsoes:
         caminho_previsao = os.path.join(config['caminho_dados_previsao'], previsao)
         
-        arquivos_previsao_temperatura = list(map(lambda x: (Path(os.path.join(caminho_previsao, x)), previsao, estacoes, previsaoId), 
+        arquivos_previsao_temperatura = list(map(lambda x: (Path(os.path.join(caminho_previsao, x)), previsao, previsaoId), 
                                                 filter(lambda x: x.endswith(SEARCH_TERM_PREVISAO_TEMPERATURA), os.listdir(caminho_previsao))))
-        arquivos_previsao_detalhada = list(map(lambda x:  (Path(os.path.join(caminho_previsao, x)), estacoes, previsaoId), 
+        arquivos_previsao_detalhada = list(map(lambda x:  (Path(os.path.join(caminho_previsao, x)), previsaoId), 
                                     filter(lambda x: 
                                         x.endswith(f'{previsao}.csv') and not x.startswith('meteogram_omp_4km'), 
                                         os.listdir(caminho_previsao))))
         dados_previsao_temperatura = []
         dados_previsao_detalhada = []
-        with Pool(3) as pool:
-            results_temperatura = pool.starmap(extrair_dados_previsao_temperatura, arquivos_previsao_temperatura)
-            dados_previsao_temperatura = [item for sublist in results_temperatura for item in sublist]
-            results_detalhado = pool.starmap(extrair_dados_previsao_detalhada, arquivos_previsao_detalhada)
-            dados_previsao_detalhada = [item for sublist in results_detalhado for item in sublist]
+        
+        if not parallel:
+            with Database() as db:
+                for args in arquivos_previsao_temperatura:
+                    dados_previsao_temperatura = extrair_dados_previsao_temperatura(*args)
+                    db.execute_command_batch(INSERT_DADOS_TEMPERATURA_PREVISAO, dados_previsao_temperatura)
+                for args in arquivos_previsao_detalhada:
+                    dados_previsao_detalhada = extrair_dados_previsao_detalhada(*args)
+                    db.execute_command_batch(INSERT_DADOS_DETALHADOS_PREVISAO, dados_previsao_detalhada)
+        else:
+            with Pool(3) as pool:
+                results_temperatura = pool.starmap(extrair_dados_previsao_temperatura, arquivos_previsao_temperatura)
+                dados_previsao_temperatura = [item for sublist in results_temperatura for item in sublist]
+                results_detalhado = pool.starmap(extrair_dados_previsao_detalhada, arquivos_previsao_detalhada)
+                dados_previsao_detalhada = [item for sublist in results_detalhado for item in sublist]
         
         with Database() as db:
             db.execute_command_batch(INSERT_DADOS_TEMPERATURA_PREVISAO, dados_previsao_temperatura)
             db.execute_command_batch(INSERT_DADOS_DETALHADOS_PREVISAO, dados_previsao_detalhada)
 
 def main():
+    print('')
     if '--retroativo' in sys.argv:
         consumir_previsoes_passado('--parallel' in sys.argv)
         return
-    extrair_previsao()
+    extrair_previsao('--parallel' in sys.argv)
 
 
 main()

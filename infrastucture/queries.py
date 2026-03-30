@@ -44,3 +44,28 @@ QUERY_INMET_DATA = """
     FROM inmet.dados_estacoes
     WHERE estacao = %(station)s AND data BETWEEN %(start_date)s AND %(start_date)s::date + INTERVAL '7 DAYS';
 """
+
+QUERY_FOREIGN_MODELS = """
+SELECT DISTINCT modelo FROM estrangeiros.previsao WHERE data_inicio = %(start_date)s ORDER BY modelo;
+"""
+
+QUERY_FOREIGN_PREVISION_DATA = """
+    SELECT
+        make_timestamp(
+            EXTRACT(YEAR FROM data)::int,
+            EXTRACT(month FROM data)::int,
+            EXTRACT(day FROM data)::int,
+            SUBSTRING(utc, 1, 2)::int,
+            SUBSTRING(utc, 3, 4)::int,
+            0
+        ) data,
+        round(temperatura::numeric, 2) as temperatura,
+        round(umidade_relativa::numeric, 2) as umidade,
+        round(precipitacao::numeric, 2) as chuva,
+        p.modelo as modelo
+    FROM estrangeiros.dados_previsao ddp
+    INNER JOIN estrangeiros.previsao p on ddp.previsao_id = p.id
+    WHERE p.data_inicio = %(start_date)s
+    AND estacao = %(station)s
+    AND p.modelo = %(modelo)s;
+"""
